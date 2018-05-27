@@ -7,9 +7,9 @@
 #  On-click: /
 #
 #  Status:
-#    Green  - MDM Enrolled if macos >= 10.12.3
-#    Red - NO MDM Enrolled if macos >= 10.12.3
-#    grey - non test if macos < 10.12.3
+#    Green  - MDM Enrolled if macos >= 10.13.4
+#    Red - NO MDM Enrolled if macos >= 10.13.4
+#    grey - non test if macos < 10.13.4
 #
 #  Created by babgond
 #
@@ -31,7 +31,7 @@ function setTitleAction {
 
   osversion="$(sw_vers | grep "ProductVersion" | awk '{print $2}')"
   buildversion="$(sw_vers | grep "Build" | awk '{print $2}')"
-  if [ "$osversion" >= "10.12.3"]
+  if [ "$osversion" >= "10.13.4"]
 	then
  	 DEPstatus="$(profiles status -type enrollment | grep "Enrolled via DEP" | awk '{print $2}')"
 	 MDMStatus="$(profiles status -type enrollment | grep "MDM enrollment" | awk '{print $2}')"
@@ -47,7 +47,7 @@ function setTitleAction {
 	else	 
      updateTitle "MDM : non testé"
 	 updateState "${STATE[3]}"
-     updateTooltip "il faut macOS 10.12.3"
+     updateTooltip "il faut macOS 10.13.4"
 	fi
   setEnabled YES
 }
