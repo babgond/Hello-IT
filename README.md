@@ -1,3 +1,4 @@
 # Hello-IT
-Script pour Hello-iT
-Scripts à copier dans "/Bibliothèque/Application Support/com.github.ygini.hello-it/CustomScripts/" 
+Scripts pour Hello-iT
+
+les scripts à copier dans "/Bibliothèque/Application Support/com.github.ygini.hello-it/CustomScripts/" 
