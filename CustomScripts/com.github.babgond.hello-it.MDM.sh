@@ -36,7 +36,7 @@ function setTitleAction {
  	 DEPstatus="$(profiles status -type enrollment | grep "Enrolled via DEP" | awk '{print $2}')"
 	 MDMStatus="$(profiles status -type enrollment | grep "MDM enrollment" | awk '{print $2}')"
 	 updateTitle "MDM : $MDMStatus"
-		if ["$MDMStatus" = "Yes" OR "Yes (User Approved)"]
+		if [ $MDMStatus == "Yes" OR "Yes (User Approved)" ]
 		then
 	 	 updateState "${STATE[0]}"
 		 updateTooltip "DEP : $DEPstatus"
@@ -46,13 +46,13 @@ function setTitleAction {
 		fi
 	else	
 	MDMStatus="$(profiles -C | awk '{print $1$2$3}')"
-		if [[ "$MDMStatus"="Thereareno" ]]
+		if [ $MDMStatus == "Thereareno" ]
 		then
-    	  updateTitle "MDM : Non"
+    	  updateTitle "MDM : non"
 		  updateState "${STATE[2]}"
     	  updateTooltip "pas de MDM installé"
     	 else
-    	 	updateTitle "MDM : Oui"
+    	 	updateTitle "MDM : oui"
 		  updateState "${STATE[0]}"
     	  updateTooltip "pour le DEP il faut 10.13.4"
      	fi
