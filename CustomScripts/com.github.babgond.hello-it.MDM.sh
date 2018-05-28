@@ -13,7 +13,7 @@
 #  Created by babgond
 #
 #  Written: 27/05/2018
-#  Updated: 27/05/2018
+#  Updated: 28/05/2018
 #
 ### The following line load the Hello IT bash script lib
 . "$HELLO_IT_SCRIPT_SH_LIBRARY/com.github.ygini.hello-it.scriptlib.sh"
@@ -27,16 +27,14 @@ function fromCronAction {
 }
 
 function setTitleAction {
-
-  osversion="$(sw_vers | grep "ProductVersion" | awk '{print $2}')"
-  #
-  #faire le test sur des chiffre et non sur des caracteres.
-  if [[ "$osversion">="10.13.4" ]]
+  minor_version="$(sw_vers -productVersion | awk -F. '{print $2}')"
+  patch_version="$(sw_vers -productVersion | awk -F. '{print $3}')"
+  if [ $minor_version -ge "13" -a $patch_version -ge "4" ] || [ $minor_version -gt "13" ]
 	then
  	 DEPstatus="$(profiles status -type enrollment | grep "Enrolled via DEP" | awk '{print $2}')"
 	 MDMStatus="$(profiles status -type enrollment | grep "MDM enrollment" | awk '{print $2}')"
 	 updateTitle "MDM : $MDMStatus"
-		if [ $MDMStatus == "Yes" OR "Yes (User Approved)" ]
+		if [ $MDMStatus == "Yes" -o "Yes (User Approved)" ]
 		then
 	 	 updateState "${STATE[0]}"
 		 updateTooltip "DEP : $DEPstatus"
